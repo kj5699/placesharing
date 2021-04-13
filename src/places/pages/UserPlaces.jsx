@@ -3,7 +3,6 @@ import { useParams } from 'react-router';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import UserList from '../../users/components/userlist/userlist';
 import PlaceList from '../components/PlaceList';
 
 

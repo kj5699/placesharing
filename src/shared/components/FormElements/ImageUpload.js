@@ -12,7 +12,6 @@ const ImageUpload = props =>{
         if(!file){
             return;
         }
-        console.log(file)
         const fileReader = new FileReader();
         fileReader.onload =()=>{
             setPreviewUrl(fileReader.result);
@@ -32,11 +31,9 @@ const ImageUpload = props =>{
             fileIsValid=true;
         }
         else{
-            console.log('no files Found')
             setIsValid(false)
             fileIsValid=false;
         }
-        console.log(props.id, pickedFile ,fileIsValid)
         props.onInput(props.id, pickedFile ,fileIsValid)
     }
 

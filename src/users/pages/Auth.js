@@ -35,7 +35,7 @@ const AuthForm = props =>{
 
 
     const authSubmitHandler= async event =>{
-        console.log(process.env.REACT_APP_BACKEND_URL)
+    
         event.preventDefault()
         if (isLoginMode){
             try{
@@ -49,10 +49,8 @@ const AuthForm = props =>{
                     {
                         'Content-Type':'application/json'
                     })  
-                    console.log(responseData) 
             auth.login(responseData.userId,responseData.token)
             }catch(err){
-                console.log(err)
             }
         }
         else{
@@ -67,7 +65,6 @@ const AuthForm = props =>{
                     'POST',
                     formData 
                 )
-                console.log(responseData)
                 auth.login(responseData.userId ,responseData.token)
             }catch(err){
                 console.log(err)
@@ -78,7 +75,7 @@ const AuthForm = props =>{
     
     
     const switchAuthHandler =(event)=>{
-        console.log('swtched')
+       
         if (!isLoginMode){
             setFormData({...formState.inputs, name:undefined, image:undefined},formState.inputs.email.isValid && formState.inputs.password.isValid)
 
