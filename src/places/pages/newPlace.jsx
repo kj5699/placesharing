@@ -58,7 +58,7 @@ const NewPlace = () => {
             Authorization: 'BEARER ' + auth.token
           })
 
-      history.push('/')
+      history.push(`/${auth.userId}/places`)
   
   }catch(err){
   }}
