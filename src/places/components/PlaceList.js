@@ -5,12 +5,14 @@ import PlaceItem from './PlaceItem';
 import './PlaceList.css'
 
 const PlaceList = props =>{
+    console.log(props.items.length)
     if (props.items.length===0){
         return <div className='place-list center'>
             <Card>
 
                 <h1>No Places Found</h1>
-                <Button to={'/places/new'}>Share Places</Button>
+                {props.isCurrentUser && <Button to={'/places/new'}>Share Places</Button>}
+                
             </Card>
             
         </div>
@@ -25,7 +27,10 @@ const PlaceList = props =>{
                             title={place.title}
                             description={place.description}
                             address={place.address}
-                            creatorId={place.creator}
+                            creatorId={place.creator.id ? place.creator.id : place.creator}
+                            userName={place.creator.name}
+                            userImage={place.creator.image}
+
                             coordinates={place.location}
                             onDelete={props.onDeletePlace}></PlaceItem>
 

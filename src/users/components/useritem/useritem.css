@@ -12,7 +12,7 @@
     text-decoration: none;
     padding: 1rem;
     color: white;
-    background: #292929;
+    background: rgb(175, 59, 175);
   }
   
   .user-item a:hover,

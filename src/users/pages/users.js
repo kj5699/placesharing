@@ -25,7 +25,7 @@ const Users = props =>{
     
     return( 
         <React.Fragment>
-            <ErrorModal error={error} onClear={clearError}></ErrorModal>
+            {!isLoading && !loadedUsers && <ErrorModal error={error} onClear={clearError}></ErrorModal>}
             {isLoading && <div className ='center'>
                 <LoadingSpinner ></LoadingSpinner>
                 
@@ -33,8 +33,6 @@ const Users = props =>{
             {!isLoading && <UserList items={loadedUsers} />}
 
         </React.Fragment>
-    
-        
     )
 }
 export default Users;

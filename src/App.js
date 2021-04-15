@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import Places from './places/pages/Places';
 // import NewPlace from './places/pages/NewPlace';
 // import UpdatePlace from './places/pages/UpdatePlace';
 // import UserPlaces from './places/pages/UserPlaces';
@@ -7,6 +8,7 @@ import MainNavigation from './shared/components/Navigation/MainNavigation';
 import LoadingSpinner from './shared/components/UIElements/LoadingSpinner';
 import { AuthContext } from './shared/context/auth-context';
 import { useAuth } from './shared/hooks/auth-hook';
+import MainPage from './shared/pages/main';
 // import AuthForm from './users/pages/Auth';
 // import Users from './users/pages/users';
 
@@ -22,7 +24,9 @@ const App =(props)=> {
 
   const routes= !!token ? (
     <Switch>
-        <Route path ='/' exact component={Users}></Route>
+        <Route path ='/' exact component={MainPage}></Route>
+        <Route path ='/users' exact component={Users}></Route>
+        <Route path ='/places' exact component={Places}></Route>
         <Route path='/:userId/places' exact component={UserPlaces}></Route>
         <Route path ='/places/new' exact component={NewPlace}></Route>
         <Route path="/places/:placeId">
@@ -33,8 +37,10 @@ const App =(props)=> {
 
   ):(
     <Switch>
-        <Route path ='/' exact component={Users}></Route>
+        <Route path ='/' exact component={MainPage}></Route>
+        <Route path ='/users' exact component={Users}></Route>
         <Route path ='/auth' exact component={AuthForm}></Route>
+        <Route path ='/places' exact component={Places}></Route>
         <Route path='/:userId/places' exact component={UserPlaces}></Route>
         <Redirect to='/auth'></Redirect>
       </Switch>
@@ -52,7 +58,7 @@ const App =(props)=> {
     <BrowserRouter>
 
       <MainNavigation></MainNavigation>
-      <main>
+      <main >
         <Suspense fallback={<div className='center'><LoadingSpinner /> </div>}>
         {routes}
         </Suspense>

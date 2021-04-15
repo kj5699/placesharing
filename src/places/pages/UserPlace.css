@@ -1,0 +1,21 @@
+
+.profile-header{ 
+    margin:3rem 0;
+    
+    
+    display: flex;
+    padding:2rem 0;
+    justify-content: center;
+    height: 25vh;
+    box-sizing: border-box;
+    box-shadow: 1px 5px 11px 4px rgba(163,156,156,0.71);
+    -webkit-box-shadow: 1px 5px 11px 4px rgba(163,156,156,0.71);
+    -moz-box-shadow: 1px 5px 11px 4px rgba(163,156,156,0.71);
+    }
+.profile-header  img{
+    margin: 0 3rem;
+    max-width: 7rem;
+    max-height: 7rem;
+}
+
+
