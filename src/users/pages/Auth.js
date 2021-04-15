@@ -110,7 +110,11 @@ const AuthForm = props =>{
                 :null
             }
             {! isLoginMode ? 
-            <ImageUpload center id="image" onInput={inputHandler}/>
+            <ImageUpload center id="image" onInput={inputHandler} options={{
+                maxSizeMB :0.05,
+                maxWidthOrHeight :100,
+                useWebWorker:true
+            }}/>
             :null}
 
         <Input

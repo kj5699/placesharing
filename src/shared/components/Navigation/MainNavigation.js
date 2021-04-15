@@ -20,7 +20,7 @@ const MainNavigation = props =>{
         {drawerIsOpen&& <Backdrop onClick={closeDrawer}></Backdrop>}   
         <SideDrawer show={drawerIsOpen} onClick={closeDrawer} >
             <nav className='main-navigation__drawer-nav'>
-            <NavLinks></NavLinks>
+            <NavLinks logoutHandler={props.logoutHandler}></NavLinks>
             </nav>
             
         </SideDrawer>    
@@ -36,7 +36,7 @@ const MainNavigation = props =>{
             </h1>
 
             <nav className='main-navigation__header-nav'>
-                <NavLinks></NavLinks>
+                <NavLinks logoutHandler={props.logoutHandler}></NavLinks>
             </nav>
 
 

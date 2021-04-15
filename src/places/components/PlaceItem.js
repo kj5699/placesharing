@@ -4,6 +4,7 @@ import Button from '../../shared/components/FormElements/Button';
 import Avatar from '../../shared/components/UIElements/Avatar';
 import Card from '../../shared/components/UIElements/Card';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import Map from '../../shared/components/UIElements/Map';
 import Modal from '../../shared/components/UIElements/Modal';
 import { AuthContext } from '../../shared/context/auth-context';
@@ -15,7 +16,7 @@ const PlaceItem = props =>{
     const auth=useContext(AuthContext)
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [showConfirmModal, setShowConfirmModal] = useState(false);
-    
+    const history = useHistory()
     const openModal=() =>{
         setModalIsOpen(true)
 
@@ -30,8 +31,8 @@ const PlaceItem = props =>{
       const cancelDeleteHandler = () => {
         setShowConfirmModal(false);
       };
-      const history=useHistory()
       const confirmDeleteHandler = async () => {
+        
         setShowConfirmModal(false);
         try{
           await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/places/${props.id}`, 
@@ -44,10 +45,9 @@ const PlaceItem = props =>{
         }catch(err){
 
         } 
-      history.push(`/${auth.userId}/places`)
+        history.push(`/${auth.userId}/places`)
         
       };
-      console.log(props)
     return(
         <React.Fragment>
         <Modal show={modalIsOpen}
@@ -85,40 +85,42 @@ const PlaceItem = props =>{
         </p>
       </Modal>
         <ErrorModal error={error} onClear={clearError}></ErrorModal>
-
         <li className='place-item'>
             <Card className='place-item__content'>
-                {props.userName&& props.userImage ?
-                <div className='place-item__userInfo'>
-                  <div className='place-item__userInfo__img'>
-                  <Avatar image={`${process.env.REACT_APP_ASSET_URL}/${props.userImage}`} alt={props.name} />
-                  </div>
                   
-                  <h3>{props.userName}</h3>
-                </div>:null}
-                <div className='place-item__image'>
-                    <img src={`${process.env.REACT_APP_ASSET_URL}/${props.image}`} alt={props.title} />
-                </div>
-                <div className='place-item__info'>
-                    <h2>{props.title}</h2>
-                    <h3>{props.address}</h3>
-                    <p>{props.description}</p>
-                </div>
-                <div className='place-item__actions'>
-                    <Button inverse onClick ={openModal}>VIEW ON MAP</Button>
-
-                    {auth.userId=== props.creatorId ? <Button to={`/places/${props.id}`}>EDIT</Button>: null}
+                  { !isLoading ?
+                
+                      <>
+                      {props.userName&& props.userImage ?
+                      <div className='place-item__userInfo'>
+                        <div className='place-item__userInfo__img'>
+                        <Avatar image={`${process.env.REACT_APP_ASSET_URL}/${props.userImage}`} alt={props.name} />
+                        </div>
+                      
+                      <h3>{props.userName}</h3>
+                    </div>:null}
                     
-                    {auth.userId=== props.creatorId  ?<Button danger onClick={showDeleteWarningHandler}>
-                        DELETE</Button> :null}
-                </div>
+                    <div className='place-item__image'>
+                        <img src={`${process.env.REACT_APP_ASSET_URL}/${props.image}`} alt={props.title} />
+                    </div>
+                    <div className='place-item__info'>
+                        <h2>{props.title}</h2>
+                        <h3>{props.address}</h3>
+                        <p>{props.description}</p>
+                    </div>
+                    <div className='place-item__actions'>
+                        <Button inverse onClick ={openModal}>VIEW ON MAP</Button>
+    
+                        {auth.userId=== props.creatorId ? <Button to={`/places/${props.id}`}>EDIT</Button>: null}
+                        
+                        {auth.userId=== props.creatorId  ?<Button danger onClick={showDeleteWarningHandler}>
+                            DELETE</Button> :null}
+                    </div>
+                    </>:<LoadingSpinner asOverlay />
+            }
             </Card>
-
-        </li>
-
+          </li>
         </React.Fragment>
-        
-
     )
 }
 export default PlaceItem;

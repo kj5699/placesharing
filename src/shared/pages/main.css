@@ -8,8 +8,8 @@
 
 
 .mainpage__places{
-    width: 100%;
-    min-width: 65vw;
+    
+    min-width: 70vw;
     overflow-y: scroll;
    
 }

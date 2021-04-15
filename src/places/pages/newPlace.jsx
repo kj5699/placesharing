@@ -95,7 +95,11 @@ const NewPlace = () => {
         onInput={inputHandler}
       />
 
-      <ImageUpload center id="image" onInput={inputHandler}/>
+      <ImageUpload center id="image" onInput={inputHandler} options={{
+                maxSizeMB :0.2,
+                maxWidthOrHeight :800,
+                useWebWorker:true
+            }}/>
             
       <Button type="submit" disabled={!formState.isValid}>
         ADD PLACE

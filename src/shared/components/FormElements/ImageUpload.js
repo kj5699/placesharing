@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Button from './Button';
-import './ImageUpload.css'
+import './ImageUpload.css';
+import imageCompression from 'browser-image-compression';
 
 const ImageUpload = props =>{
     const [file,setFile]=useState(null);
@@ -12,6 +13,7 @@ const ImageUpload = props =>{
         if(!file){
             return;
         }
+        console.log('recieved file',file, file.size)
         const fileReader = new FileReader();
         fileReader.onload =()=>{
             setPreviewUrl(fileReader.result);
@@ -20,21 +22,35 @@ const ImageUpload = props =>{
 
     },[file])
 
-    const pickedHandler = event =>{
+    const pickedHandler = async event =>{
 
         let pickedFile;
+        let compressedFile
         let fileIsValid = isValid;
+
+        
         if(event.target.files && event.target.files.length ===1){
             pickedFile =event.target.files[0]
-            setFile(pickedFile);
-            setIsValid(true);
-            fileIsValid=true;
+
+            console.log('originalFile instanceof Blob', pickedFile instanceof Blob); // true
+            console.log(`originalFile size ${pickedFile.size / 1024 / 1024} MB`);
+            try{
+                compressedFile= await imageCompression(pickedFile, props.options)
+                console.log('compressedFile instanceof Blob', compressedFile); // true
+                console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+                setFile(compressedFile)
+                setIsValid(true);
+                fileIsValid=true;
+            }catch(err){
+                console.log(err)
+            }
+            
         }
         else{
             setIsValid(false)
             fileIsValid=false;
         }
-        props.onInput(props.id, pickedFile ,fileIsValid)
+        props.onInput(props.id, compressedFile ,fileIsValid)
     }
 
     const pickImageHandler =enent =>{

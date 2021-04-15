@@ -29,10 +29,7 @@ const UserPlaces = props =>{
         fetchPlaces()
         setIsCurrentUser(auth.userId===userId)
         
-    },[sendRequest,userId])
-
-    console.log(loadedPlaces)
-    console.log(activeUser)
+    },[sendRequest,userId,auth.userId])
 
     const deletePlaceHandler =(deletedPlaceId)=>{
         setLoadedPlaces(prevState=> prevState.filter(place=> place.id!==deletedPlaceId))
