@@ -26,9 +26,9 @@ const PlaceList = props =>{
                             title={place.title}
                             description={place.description}
                             address={place.address}
-                            creatorId={place.creator.id ? place.creator.id : place.creator}
+                            creatorId={place.creator._id ? place.creator._id : place.creator}
                             userName={place.creator.name}
-                            userImage={place.creator.image}
+                            userImage={place.mage}
 
                             coordinates={place.location}
                             onDelete={props.onDeletePlace}></PlaceItem>

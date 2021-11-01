@@ -67,7 +67,7 @@ const ImageUpload = props =>{
 
             />
             <div className={`image-upload ${props.center && 'center'}`}>
-                <div className="image-upload__preview">
+            <div className="image-upload__preview">
                     {previewUrl&&<img src={previewUrl} alt='Preview'></img>}
                     {!previewUrl&&<p>Please pick a image</p>}
                 </div>

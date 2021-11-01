@@ -16,7 +16,6 @@ import { useHttpClient } from '../../shared/hooks/http-hook';
 import ImageUpload from '../../shared/components/FormElements/ImageUpload';
 
 const AuthForm = props =>{
-
     const auth= useContext(AuthContext)
     const {isLoading ,error, sendRequest, clearError}= useHttpClient()
     
@@ -30,12 +29,9 @@ const AuthForm = props =>{
             value:'',
             isValid:false
         }
-
     },false)
 
-
     const authSubmitHandler= async event =>{
-    
         event.preventDefault()
         if (isLoginMode){
             try{
@@ -68,14 +64,11 @@ const AuthForm = props =>{
                 auth.login(responseData.userId ,responseData.token)
             }catch(err){
                 console.log(err)
-            }
-            
+            } 
         }
     }
     
-    
     const switchAuthHandler =(event)=>{
-       
         if (!isLoginMode){
             setFormData({...formState.inputs, name:undefined, image:undefined},formState.inputs.email.isValid && formState.inputs.password.isValid)
 
@@ -84,7 +77,6 @@ const AuthForm = props =>{
                         name: {value:'',isValid: false}, 
                         image:{value:null, isValid:false}},
                         false)
-
         }
         setIsLoginMode(prevState => !prevState)
     }
